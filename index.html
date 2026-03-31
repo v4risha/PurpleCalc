@@ -1354,9 +1354,10 @@
     document.addEventListener('keydown', (event) => {
       const key = event.key;
 
-      if ((key >= '0' && key <= '9') || ['+', '-', '*', '/', '%', '.', '(', ')', ','].includes(key)) {
-        event.preventDefault();
-        insertText(key);
+      if ((key >= '0' && key <= '9') || ['+', '-', '*', '/', '%', '.', '(', ')', ',', '^'].includes(key)) {
+  event.preventDefault();
+  insertText(key);
+}
       } else if (key === 'Enter' || key === '=') {
         event.preventDefault();
         calculate();
