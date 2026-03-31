@@ -42,11 +42,9 @@
       --shadow: 0 18px 40px rgba(92, 62, 156, 0.18);
       --inner-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
       --focus: 0 0 0 3px rgba(109, 40, 217, 0.22);
-      --success: #2d7a44;
     }
 
     * { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -59,8 +57,6 @@
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
     }
-
-    img { max-width: 100%; display: block; }
 
     .page {
       width: min(1100px, 100%);
@@ -82,9 +78,7 @@
       font-weight: 700;
     }
 
-    .skip-link:focus {
-      left: 12px;
-    }
+    .skip-link:focus { left: 12px; }
 
     .site-header {
       display: flex;
@@ -332,9 +326,7 @@
       transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
     }
 
-    .tab:hover {
-      filter: brightness(1.02);
-    }
+    .tab:hover { filter: brightness(1.02); }
 
     .tab.active {
       background: linear-gradient(180deg, #ffffff, #e2d5ff);
@@ -550,11 +542,11 @@
             class="display"
             type="text"
             placeholder="0"
-            inputmode="decimal"
             autocomplete="off"
             spellcheck="false"
             aria-describedby="displayHelp"
             aria-label="Calculator input"
+            readonly
           />
           <div class="memory-line">
             <span id="angleLabel">Angle: DEG</span>
@@ -777,6 +769,7 @@
 
         if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
         if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
+
         if (nextIndex !== index) {
           event.preventDefault();
           tabs[nextIndex].focus();
@@ -789,9 +782,9 @@
       memoryLabel.textContent = `M: ${formatNumber(memory)}`;
     }
 
-    function updateAngle() {
+    function updateAngle(show = false) {
       angleLabel.textContent = `Angle: ${angleMode}`;
-      showToast(`Angle mode: ${angleMode}`);
+      if (show) showToast(`Angle mode: ${angleMode}`);
     }
 
     function formatNumber(num) {
@@ -804,7 +797,7 @@
     }
 
     function insertText(text) {
-      if (justCalculated && /[0-9.(πAns]/.test(text)) display.value = '';
+      if (justCalculated && /[0-9.(πA]/.test(text)) display.value = '';
       if (display.value === 'Error') display.value = '';
       display.value += text;
       justCalculated = false;
@@ -926,7 +919,6 @@
         if (ch === 'e') {
           const prev = expr[i - 1];
           const next = expr[i + 1];
-
           const prevIsNumberLike = /[0-9.]/.test(prev || '');
           const nextIsExponentLike = /[+\-0-9]/.test(next || '');
 
@@ -1304,7 +1296,7 @@
           break;
         case 'setAngle':
           angleMode = button.dataset.angle;
-          updateAngle();
+          updateAngle(true);
           break;
         case 'memoryStore':
           try {
@@ -1360,13 +1352,10 @@
     });
 
     document.addEventListener('keydown', (event) => {
-      const activeTag = document.activeElement?.tagName;
-      const typingAllowed = activeTag === 'INPUT' || activeTag === 'BODY' || document.activeElement === display;
-      if (!typingAllowed) return;
-
       const key = event.key;
 
       if ((key >= '0' && key <= '9') || ['+', '-', '*', '/', '%', '.', '(', ')', ','].includes(key)) {
+        event.preventDefault();
         insertText(key);
       } else if (key === 'Enter' || key === '=') {
         event.preventDefault();
@@ -1381,7 +1370,7 @@
     });
 
     updateMemory();
-    angleLabel.textContent = `Angle: ${angleMode}`;
+    updateAngle(false);
   </script>
 </body>
 </html>
