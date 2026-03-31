@@ -3,24 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PurpleCalc Pro | Free Scientific Calculator Online</title>
-  <meta
-    name="description"
-    content="PurpleCalc Pro is a free online scientific calculator with trigonometry, logs, roots, memory tools, angle modes, keyboard support, and a polished purple interface."
-  />
+  <title>calcX | Free A-Level Scientific Calculator</title>
+  <meta name="description" content="calcX is a polished online A-Level scientific calculator with powers, trigonometry, logs, roots, memory tools, angle modes, keyboard support, and a professional purple interface." />
   <meta name="theme-color" content="#6d28d9" />
   <meta name="robots" content="index, follow" />
-  <meta name="author" content="PurpleCalc Pro" />
-  <meta name="keywords" content="scientific calculator, online calculator, purple calculator, maths calculator, trigonometry calculator, revision calculator" />
-  <meta property="og:title" content="PurpleCalc Pro | Free Scientific Calculator Online" />
-  <meta property="og:description" content="A polished scientific calculator website with advanced functions, memory tools, angle modes, and keyboard support." />
+  <meta name="author" content="calcX" />
+  <meta name="keywords" content="A-Level calculator, scientific calculator, online calculator, calcX, trigonometry calculator, exponent calculator, revision calculator" />
+  <meta property="og:title" content="calcX | Free A-Level Scientific Calculator" />
+  <meta property="og:description" content="A polished scientific calculator website with powers, trigonometry, logs, roots, angle modes, memory tools, and full keyboard support." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%236d28d9'/%3E%3Ctext x='50%25' y='54%25' font-size='30' text-anchor='middle' fill='white' font-family='Arial, sans-serif'%3E%F0%9F%A7%AE%3C/text%3E%3C/svg%3E" />
+  <meta property="og:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%236d28d9'/%3E%3Ctext x='50%25' y='54%25' font-size='28' text-anchor='middle' fill='white' font-family='Arial, sans-serif'%3ECX%3C/text%3E%3C/svg%3E" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="PurpleCalc Pro | Free Scientific Calculator Online" />
-  <meta name="twitter:description" content="A polished scientific calculator website with advanced functions, memory tools, angle modes, and keyboard support." />
-  <link rel="canonical" href="https://calculator-pied-nine-58.vercel.app/" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%236d28d9'/%3E%3Ctext x='50%25' y='54%25' font-size='30' text-anchor='middle' fill='white' font-family='Arial, sans-serif'%3E%F0%9F%A7%AE%3C/text%3E%3C/svg%3E" />
+  <meta name="twitter:title" content="calcX | Free A-Level Scientific Calculator" />
+  <meta name="twitter:description" content="A polished scientific calculator website with advanced functions, angle modes, memory tools, and keyboard support." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%236d28d9'/%3E%3Ctext x='50%25' y='54%25' font-size='28' text-anchor='middle' fill='white' font-family='Arial, sans-serif'%3ECX%3C/text%3E%3C/svg%3E" />
   <style>
     :root {
       --bg: linear-gradient(180deg, #f6f0ff, #e7dcff);
@@ -94,9 +90,23 @@
       box-shadow: 0 10px 28px rgba(92, 62, 156, 0.08);
     }
 
-    .site-brand { display: flex; flex-direction: column; gap: 4px; }
-    .site-brand h1 { margin: 0; font-size: 1.1rem; }
-    .site-brand p { margin: 0; color: var(--muted); font-size: 0.84rem; }
+    .site-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .site-brand h1 {
+      margin: 0;
+      font-size: 1.15rem;
+      letter-spacing: 0.02em;
+    }
+
+    .site-brand p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
 
     .nav-links {
       display: flex;
@@ -143,15 +153,15 @@
 
     .hero-card h2 {
       margin: 0 0 10px;
-      font-size: clamp(1.6rem, 4vw, 2.5rem);
+      font-size: clamp(1.75rem, 4vw, 2.6rem);
       line-height: 1.05;
     }
 
     .hero-card p {
       margin: 0 0 16px;
       color: var(--muted);
-      line-height: 1.5;
-      max-width: 55ch;
+      line-height: 1.55;
+      max-width: 56ch;
     }
 
     .hero-actions {
@@ -207,6 +217,8 @@
     .mini-stat span {
       color: var(--muted);
       font-size: 0.82rem;
+      line-height: 1.45;
+      display: block;
     }
 
     .calculator-section {
@@ -274,7 +286,8 @@
       scrollbar-width: none;
     }
 
-    .history::-webkit-scrollbar, .display::-webkit-scrollbar { display: none; }
+    .history::-webkit-scrollbar,
+    .display::-webkit-scrollbar { display: none; }
 
     .history {
       min-height: 18px;
@@ -361,6 +374,7 @@
 
     button.key:hover { filter: brightness(1.02); }
     button.key:active { transform: translateY(1px) scale(0.99); }
+
     .dark { background: var(--key-dark); }
     .fn { background: var(--key-fn); }
     .op { background: var(--key-op); }
@@ -410,6 +424,7 @@
 
     .feature-card { padding: 18px; }
     .feature-card h3 { margin: 0 0 8px; font-size: 0.98rem; }
+
     .feature-card p {
       margin: 0;
       color: var(--muted);
@@ -426,12 +441,15 @@
 
     .info-card { padding: 16px 18px; }
     .info-card h3 { margin: 0 0 8px; font-size: 0.96rem; }
-    .info-card p, .info-card ul {
+
+    .info-card p,
+    .info-card ul {
       margin: 0;
       color: var(--muted);
       font-size: 0.84rem;
       line-height: 1.5;
     }
+
     .info-card ul { padding-left: 18px; }
 
     .help {
@@ -462,22 +480,23 @@
     }
 
     @media (max-width: 900px) {
-      .hero, .feature-grid, .info-strip {
+      .hero,
+      .feature-grid,
+      .info-strip {
         grid-template-columns: 1fr;
       }
     }
 
     @media (max-width: 520px) {
       body { padding: 12px; }
-      .site-header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+      .site-header { flex-direction: column; align-items: flex-start; }
       .calculator { width: min(96vw, 360px); }
       button.key { min-height: 42px; font-size: 0.88rem; }
       .tabs { gap: 5px; }
       .tab { font-size: 0.68rem; }
-      .hero-card, .feature-card, .info-card { padding: 16px; }
+      .hero-card,
+      .feature-card,
+      .info-card { padding: 16px; }
     }
   </style>
 </head>
@@ -487,8 +506,8 @@
   <div class="page">
     <header class="site-header">
       <div class="site-brand">
-        <h1>PurpleCalc Pro</h1>
-        <p>A polished scientific calculator website with a modern purple interface.</p>
+        <h1>calcX</h1>
+        <p>A polished A-Level scientific calculator with full keyboard support.</p>
       </div>
       <nav class="nav-links" aria-label="Main navigation">
         <a href="#calculatorApp">Calculator</a>
@@ -499,25 +518,26 @@
 
     <section class="hero" aria-label="Introduction">
       <div class="hero-card">
-        <h2>Fast, pretty, and packed with scientific tools.</h2>
-        <p>Use PurpleCalc Pro as a stylish web calculator for homework, revision, quick calculations, and advanced scientific functions. It is built to feel smooth on desktop and mobile, while still looking like a real product website.</p>
+        <h2>Professional, fast, and built for A-Level maths.</h2>
+        <p>calcX gives you a clean scientific calculator experience for revision, homework, and exam practice. It supports powers like 5^3, trigonometry, logs, roots, brackets, memory tools, angle modes, and direct typing from your keyboard.</p>
         <div class="hero-actions">
           <a class="primary" href="#calculatorApp">Open Calculator</a>
           <a class="secondary" href="#features">See Features</a>
         </div>
       </div>
+
       <aside class="hero-side info-card" aria-label="Highlights">
         <div class="mini-stat">
-          <strong>Advanced Modes</strong>
-          <span>Basic, science, advanced, and memory tools in one place.</span>
+          <strong>A-Level Ready</strong>
+          <span>Powers, roots, logs, trig, fractions, permutations, combinations, and angle modes.</span>
         </div>
         <div class="mini-stat">
-          <strong>Responsive Design</strong>
-          <span>Fits smaller screens better while keeping the calculator usable.</span>
+          <strong>Keyboard + Screen Input</strong>
+          <span>Type expressions directly, including 5^3, brackets, decimals, percentages, and scientific notation.</span>
         </div>
         <div class="mini-stat">
-          <strong>Website Ready</strong>
-          <span>Includes a header, hero, features area, guide section, and footer.</span>
+          <strong>Publishable Design</strong>
+          <span>Professional branding, clean sections, polished purple theme, and responsive layout.</span>
         </div>
       </aside>
     </section>
@@ -528,8 +548,8 @@
 
         <div class="top">
           <div class="brand">
-            <h1>Calc Pro 991 Style</h1>
-            <span>Purple scientific calculator</span>
+            <h1>calcX</h1>
+            <span>A-Level scientific calculator</span>
           </div>
           <div class="mode-pill" id="modeLabel" aria-live="polite">MODE: BASIC</div>
         </div>
@@ -537,17 +557,7 @@
         <section class="display-wrap" aria-label="Calculator display">
           <div class="history" id="history" aria-live="polite"></div>
           <label class="sr-only" for="display">Calculator input</label>
-          <input
-            id="display"
-            class="display"
-            type="text"
-            placeholder="0"
-            autocomplete="off"
-            spellcheck="false"
-            aria-describedby="displayHelp"
-            aria-label="Calculator input"
-            readonly
-          />
+          <input id="display" class="display" type="text" placeholder="0" autocomplete="off" spellcheck="false" aria-describedby="displayHelp" aria-label="Calculator input" inputmode="decimal" />
           <div class="memory-line">
             <span id="angleLabel">Angle: DEG</span>
             <span id="memoryLabel">M: 0</span>
@@ -676,24 +686,24 @@
         </section>
 
         <div class="help">
-          Styled like a premium purple scientific calculator. Includes many fx-991-style functions in web form.<br>
-          Keyboard supported: numbers, operators, Enter, Backspace, Delete, Escape, parentheses, comma, and dot.
+          A polished purple A-Level calculator with direct typing and on-screen controls.<br>
+          Keyboard supported: numbers, operators, Enter, Backspace, Delete, Escape, brackets, comma, dot, and ^ for powers.
         </div>
       </main>
     </section>
 
     <section class="feature-grid" id="features">
       <article class="feature-card">
-        <h3>Scientific Power</h3>
-        <p>Trigonometry, logs, roots, powers, factorials, combinations, permutations, angle modes, and more.</p>
+        <h3>A-Level Scientific Tools</h3>
+        <p>Use powers, roots, trigonometry, logarithms, factorials, permutations, combinations, fractions, and angle modes in one clean interface.</p>
       </article>
       <article class="feature-card">
-        <h3>Website Polish</h3>
-        <p>Landing section, nice spacing, cleaner branding, responsive cards, and a stronger visual flow for a real website feel.</p>
+        <h3>Professional Website Design</h3>
+        <p>The calculator sits inside a full landing page with cleaner branding, better spacing, stronger hierarchy, and a polished publish-ready finish.</p>
       </article>
       <article class="feature-card">
-        <h3>Easy to Use</h3>
-        <p>Keyboard support, memory functions, clear labels, and a layout that keeps important tools easy to find.</p>
+        <h3>Better Input Experience</h3>
+        <p>Type straight into the screen or use the buttons. The calculator supports expressions like 5^3, brackets, decimals, percentages, and Ans recall.</p>
       </article>
     </section>
 
@@ -701,20 +711,20 @@
       <article class="info-card">
         <h3>How to use</h3>
         <ul>
-          <li>Use the tabs to switch between basic, science, advanced, and memory tools.</li>
-          <li>Use commas for advanced operations like gcd, lcm, averages, combinations, roots, and percentage calculations.</li>
-          <li>Use Enter for equals, Backspace for delete, and Delete or Escape for AC.</li>
+          <li>Type directly into the display or use the calculator buttons.</li>
+          <li>Use <strong>^</strong> for powers, for example <strong>5^3</strong>.</li>
+          <li>Use commas for functions such as gcd, lcm, averages, roots, nCr, nPr, and percentage-of calculations.</li>
+          <li>Press Enter for equals, Backspace for delete, and Delete or Escape for AC.</li>
         </ul>
       </article>
+
       <article class="info-card">
-        <h3>Good website extras</h3>
-        <p>This version includes page metadata, a branded header, a hero section, feature cards, guide content, a footer, better accessibility, and improved parser safety so it feels like a complete publishable website instead of only a calculator box.</p>
+        <h3>What was fixed</h3>
+        <p>This version corrects the broken JavaScript syntax, restores the parser, enables typing into the screen, keeps keyboard input working, improves the calculator branding to calcX, and keeps the original purple colour theme in a more professional layout.</p>
       </article>
     </section>
 
-    <footer class="site-footer">
-      PurpleCalc Pro • Scientific calculator website • Built with HTML, CSS, and JavaScript
-    </footer>
+    <footer class="site-footer">calcX • A-Level scientific calculator website • Built with HTML, CSS, and JavaScript</footer>
   </div>
 
   <script>
@@ -745,16 +755,15 @@
     }
 
     function setPanel(name, focusPanel = false) {
-      tabs.forEach(tab => {
+      tabs.forEach((tab) => {
         const isActive = tab.dataset.panel === name;
         tab.classList.toggle('active', isActive);
         tab.setAttribute('aria-selected', String(isActive));
         tab.tabIndex = isActive ? 0 : -1;
       });
 
-      panels.forEach(panel => {
-        const isActive = panel.id === name;
-        panel.classList.toggle('active', isActive);
+      panels.forEach((panel) => {
+        panel.classList.toggle('active', panel.id === name);
       });
 
       modeLabel.textContent = `MODE: ${name.toUpperCase()}`;
@@ -763,7 +772,6 @@
 
     tabs.forEach((tab, index) => {
       tab.addEventListener('click', () => setPanel(tab.dataset.panel, true));
-
       tab.addEventListener('keydown', (event) => {
         let nextIndex = index;
 
@@ -790,15 +798,44 @@
     function formatNumber(num) {
       if (typeof num !== 'number' || !Number.isFinite(num)) return String(num);
       if (Object.is(num, -0)) num = 0;
+
       if (Math.abs(num) >= 1e10 || (Math.abs(num) > 0 && Math.abs(num) < 1e-8)) {
         return num.toExponential(8).replace(/\.?0+e/, 'e');
       }
+
       return parseFloat(num.toFixed(10)).toString();
     }
 
+    function sanitizeExpression(expr) {
+      return expr
+        .replace(/×/g, '*')
+        .replace(/÷/g, '/')
+        .replace(/\s+/g, '');
+    }
+
+    function isStartOfValue(char) {
+      return /[0-9.(πeA]/.test(char || '');
+    }
+
+    function shouldInsertImplicitMultiply(before, inserted) {
+      const beforeChar = before.slice(-1);
+      const insertedChar = inserted[0];
+      const beforeEndsValue = /[0-9.)πe]/.test(beforeChar || '') || before.endsWith('Ans');
+      const insertedStartsValue = isStartOfValue(insertedChar) || inserted.startsWith('Ans');
+      return beforeEndsValue && insertedStartsValue;
+    }
+
     function insertText(text) {
-      if (justCalculated && /[0-9.(πA]/.test(text)) display.value = '';
       if (display.value === 'Error') display.value = '';
+
+      if (justCalculated && isStartOfValue(text[0])) {
+        display.value = '';
+      }
+
+      if (shouldInsertImplicitMultiply(display.value, text)) {
+        display.value += '*';
+      }
+
       display.value += text;
       justCalculated = false;
       display.focus();
@@ -818,20 +855,8 @@
         display.focus();
         return;
       }
+
       display.value = display.value.slice(0, -1);
-      display.focus();
-    }
-
-    function toggleSign() {
-      const val = display.value.trim();
-      if (!val || val === 'Error') return;
-
-      try {
-        const num = safeEval(val);
-        display.value = formatNumber(-num);
-      } catch {
-        display.value = `(-1*(${val}))`;
-      }
       display.focus();
     }
 
@@ -866,7 +891,7 @@
       return value;
     }
 
-    function toFractionString(value, tolerance = 1.0E-10) {
+    function toFractionString(value, tolerance = 1e-10) {
       if (!Number.isFinite(value)) return 'Error';
       if (Number.isInteger(value)) return `${value}/1`;
 
@@ -876,18 +901,18 @@
       let h1 = 1, h2 = 0, k1 = 0, k2 = 1, b = value;
       do {
         const a = Math.floor(b);
-        let aux = h1; h1 = a * h1 + h2; h2 = aux;
-        aux = k1; k1 = a * k1 + k2; k2 = aux;
+        let aux = h1;
+        h1 = a * h1 + h2;
+        h2 = aux;
+        aux = k1;
+        k1 = a * k1 + k2;
+        k2 = aux;
         const frac = b - a;
         if (Math.abs(frac) < tolerance) break;
         b = 1 / frac;
       } while (Math.abs(value - h1 / k1) > tolerance && k1 < 100000 && Number.isFinite(b));
 
       return `${sign * h1}/${k1}`;
-    }
-
-    function sanitizeExpression(expr) {
-      return expr.replace(/×/g, '*').replace(/÷/g, '/').replace(/\s+/g, '');
     }
 
     function tokenize(expr) {
@@ -917,32 +942,15 @@
         }
 
         if (ch === 'e') {
-          const prev = expr[i - 1];
-          const next = expr[i + 1];
-          const prevIsNumberLike = /[0-9.]/.test(prev || '');
-          const nextIsExponentLike = /[+\-0-9]/.test(next || '');
-
-          if (prevIsNumberLike && nextIsExponentLike) {
-            let j = i + 1;
-            if (expr[j] === '+' || expr[j] === '-') j++;
-            while (j < expr.length && /[0-9]/.test(expr[j])) j++;
-            const lastNumber = tokens[tokens.length - 1];
-            if (!lastNumber || lastNumber.type !== 'number_string') {
-              throw new Error('Invalid scientific notation');
-            }
-            lastNumber.value += expr.slice(i, j);
-            i = j;
-            continue;
-          } else {
-            tokens.push({ type: 'number', value: Math.E });
-            i++;
-            continue;
-          }
+          tokens.push({ type: 'number', value: Math.E });
+          i++;
+          continue;
         }
 
         if (/[0-9.]/.test(ch)) {
           let j = i;
           let dotCount = 0;
+
           while (j < expr.length && /[0-9.]/.test(expr[j])) {
             if (expr[j] === '.') dotCount++;
             if (dotCount > 1) throw new Error('Invalid number');
@@ -954,7 +962,7 @@
           if (expr[j] === 'e' || expr[j] === 'E') {
             let k = j + 1;
             if (expr[k] === '+' || expr[k] === '-') k++;
-            let digitsStart = k;
+            const digitsStart = k;
             while (k < expr.length && /[0-9]/.test(expr[k])) k++;
             if (k > digitsStart) {
               raw += expr.slice(j, k);
@@ -962,7 +970,9 @@
             }
           }
 
-          tokens.push({ type: 'number_string', value: raw });
+          const value = Number(raw);
+          if (!Number.isFinite(value)) throw new Error('Invalid number');
+          tokens.push({ type: 'number', value });
           i = j;
           continue;
         }
@@ -970,14 +980,7 @@
         throw new Error('Invalid character');
       }
 
-      return tokens.map(token => {
-        if (token.type === 'number_string') {
-          const value = Number(token.value);
-          if (!Number.isFinite(value)) throw new Error('Invalid number');
-          return { type: 'number', value };
-        }
-        return token;
-      });
+      return tokens;
     }
 
     function safeEval(expr) {
@@ -998,6 +1001,7 @@
 
       function parseExpression() {
         let value = parseTerm();
+
         while (true) {
           const token = peek();
           if (!token || token.type !== 'op' || !['+', '-'].includes(token.value)) break;
@@ -1005,11 +1009,13 @@
           const right = parseTerm();
           value = token.value === '+' ? value + right : value - right;
         }
+
         return value;
       }
 
       function parseTerm() {
         let value = parsePower();
+
         while (true) {
           const token = peek();
           if (!token || token.type !== 'op' || !['*', '/', '%'].includes(token.value)) break;
@@ -1019,6 +1025,7 @@
           if (token.value === '/') value /= right;
           if (token.value === '%') value %= right;
         }
+
         return value;
       }
 
@@ -1085,6 +1092,7 @@
       for (const char of text) {
         if (char === '(') depth++;
         if (char === ')') depth--;
+
         if (char === ',' && depth === 0) {
           parts.push(current.trim());
           current = '';
@@ -1098,23 +1106,44 @@
     }
 
     function parseCSV(text) {
-      const values = splitTopLevelCommas(text).map(part => safeEval(part));
-      if (!values.length || values.some(v => !Number.isFinite(v))) throw new Error('Bad values');
+      const values = splitTopLevelCommas(text).map((part) => safeEval(part));
+      if (!values.length || values.some((v) => !Number.isFinite(v))) throw new Error('Bad values');
       return values;
     }
 
-    function evalFraction(text) {
-      return safeEval(text);
+    function toggleSign() {
+      const val = display.value.trim();
+      if (!val || val === 'Error') return;
+
+      try {
+        const num = safeEval(val);
+        display.value = formatNumber(-num);
+      } catch {
+        display.value = `-(${val})`;
+      }
+
+      justCalculated = false;
+      display.focus();
     }
 
     function applyFunction(name) {
       try {
-        let value, result;
+        let value;
+        let result;
 
         switch (name) {
-          case 'sin': value = getValue(); result = Math.sin(toRadians(value)); break;
-          case 'cos': value = getValue(); result = Math.cos(toRadians(value)); break;
-          case 'tan': value = getValue(); result = Math.tan(toRadians(value)); break;
+          case 'sin':
+            value = getValue();
+            result = Math.sin(toRadians(value));
+            break;
+          case 'cos':
+            value = getValue();
+            result = Math.cos(toRadians(value));
+            break;
+          case 'tan':
+            value = getValue();
+            result = Math.tan(toRadians(value));
+            break;
           case 'asin':
             value = getValue();
             if (value < -1 || value > 1) throw new Error();
@@ -1125,16 +1154,31 @@
             if (value < -1 || value > 1) throw new Error();
             result = fromRadians(Math.acos(value));
             break;
-          case 'atan': value = getValue(); result = fromRadians(Math.atan(value)); break;
-          case 'sinh': value = getValue(); result = Math.sinh(value); break;
-          case 'cosh': value = getValue(); result = Math.cosh(value); break;
-          case 'tanh': value = getValue(); result = Math.tanh(value); break;
+          case 'atan':
+            value = getValue();
+            result = fromRadians(Math.atan(value));
+            break;
+          case 'sinh':
+            value = getValue();
+            result = Math.sinh(value);
+            break;
+          case 'cosh':
+            value = getValue();
+            result = Math.cosh(value);
+            break;
+          case 'tanh':
+            value = getValue();
+            result = Math.tanh(value);
+            break;
           case 'sqrt':
             value = getValue();
             if (value < 0) throw new Error();
             result = Math.sqrt(value);
             break;
-          case 'cbrt': value = getValue(); result = Math.cbrt(value); break;
+          case 'cbrt':
+            value = getValue();
+            result = Math.cbrt(value);
+            break;
           case 'log10':
             value = getValue();
             if (value <= 0) throw new Error();
@@ -1145,21 +1189,50 @@
             if (value <= 0) throw new Error();
             result = Math.log(value);
             break;
-          case 'exp': value = getValue(); result = Math.exp(value); break;
-          case 'abs': value = getValue(); result = Math.abs(value); break;
-          case 'round': value = getValue(); result = Math.round(value); break;
-          case 'floor': value = getValue(); result = Math.floor(value); break;
-          case 'ceil': value = getValue(); result = Math.ceil(value); break;
-          case 'factorial': value = getValue(); result = factorial(value); break;
+          case 'exp':
+            value = getValue();
+            result = Math.exp(value);
+            break;
+          case 'abs':
+            value = getValue();
+            result = Math.abs(value);
+            break;
+          case 'round':
+            value = getValue();
+            result = Math.round(value);
+            break;
+          case 'floor':
+            value = getValue();
+            result = Math.floor(value);
+            break;
+          case 'ceil':
+            value = getValue();
+            result = Math.ceil(value);
+            break;
+          case 'factorial':
+            value = getValue();
+            result = factorial(value);
+            break;
           case 'reciprocal':
             value = getValue();
             if (value === 0) throw new Error();
             result = 1 / value;
             break;
-          case 'square': value = getValue(); result = value ** 2; break;
-          case 'cube': value = getValue(); result = value ** 3; break;
-          case 'pow10': value = getValue(); result = 10 ** value; break;
-          case 'rand': result = Math.random(); break;
+          case 'square':
+            value = getValue();
+            result = value ** 2;
+            break;
+          case 'cube':
+            value = getValue();
+            result = value ** 3;
+            break;
+          case 'pow10':
+            value = getValue();
+            result = 10 ** value;
+            break;
+          case 'rand':
+            result = Math.random();
+            break;
           case 'scientific':
             insertText('e');
             return;
@@ -1171,7 +1244,7 @@
             display.focus();
             return;
           case 'toDecimal':
-            value = evalFraction(display.value.trim());
+            value = getValue();
             result = value;
             break;
           case 'percentOf': {
@@ -1186,11 +1259,13 @@
           }
           case 'nPr': {
             const [n, r] = parseCSV(display.value);
+            if (r > n || n < 0 || r < 0 || !Number.isInteger(n) || !Number.isInteger(r)) throw new Error();
             result = factorial(n) / factorial(n - r);
             break;
           }
           case 'nCr': {
             const [n, r] = parseCSV(display.value);
+            if (r > n || n < 0 || r < 0 || !Number.isInteger(n) || !Number.isInteger(r)) throw new Error();
             result = factorial(n) / (factorial(r) * factorial(n - r));
             break;
           }
@@ -1218,10 +1293,12 @@
           }
           case 'mean2': {
             const values = parseCSV(display.value);
-            result = values.reduce((s, v) => s + v, 0) / values.length;
+            result = values.reduce((sum, v) => sum + v, 0) / values.length;
             break;
           }
-          case 'lastResultSquare': result = ans ** 2; break;
+          case 'lastResultSquare':
+            result = ans ** 2;
+            break;
           case 'lastResultSqrt':
             if (ans < 0) throw new Error();
             result = Math.sqrt(ans);
@@ -1351,27 +1428,56 @@
       if (button) performAction(button.dataset.action, button);
     });
 
+    display.addEventListener('input', () => {
+      if (display.value === 'Error') return;
+      justCalculated = false;
+    });
+
     document.addEventListener('keydown', (event) => {
+      const active = document.activeElement;
+      const isTypingIntoDisplay = active === display;
       const key = event.key;
 
+      if (event.ctrlKey || event.metaKey || event.altKey) return;
+
       if ((key >= '0' && key <= '9') || ['+', '-', '*', '/', '%', '.', '(', ')', ',', '^'].includes(key)) {
-  event.preventDefault();
-  insertText(key);
-}
-      } else if (key === 'Enter' || key === '=') {
+        if (!isTypingIntoDisplay) {
+          event.preventDefault();
+          insertText(key);
+        }
+        return;
+      }
+
+      if (key === 'Enter' || key === '=') {
         event.preventDefault();
         calculate();
-      } else if (key === 'Backspace') {
-        event.preventDefault();
-        deleteLast();
-      } else if (key === 'Delete' || key === 'Escape') {
+        return;
+      }
+
+      if (key === 'Backspace') {
+        if (!isTypingIntoDisplay) {
+          event.preventDefault();
+          deleteLast();
+        }
+        return;
+      }
+
+      if (key === 'Delete' || key === 'Escape') {
         event.preventDefault();
         clearAll();
+        return;
+      }
+
+      if (key.toLowerCase() === 'p') {
+        event.preventDefault();
+        insertText('π');
+        return;
       }
     });
 
     updateMemory();
     updateAngle(false);
+    setPanel('basic');
   </script>
 </body>
 </html>
