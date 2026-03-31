@@ -714,13 +714,14 @@
           <li>Type directly into the display or use the calculator buttons.</li>
           <li>Use <strong>^</strong> for powers, for example <strong>5^3</strong>.</li>
           <li>Use commas for functions such as gcd, lcm, averages, roots, nCr, nPr, and percentage-of calculations.</li>
+          <li>Trig buttons insert functions. Example: press <strong>sin</strong>, type <strong>30)</strong>, then press <strong>=</strong>.</li>
           <li>Press Enter for equals, Backspace for delete, and Delete or Escape for AC.</li>
         </ul>
       </article>
 
       <article class="info-card">
         <h3>What was fixed</h3>
-        <p>This version corrects the broken JavaScript syntax, restores the parser, enables typing into the screen, keeps keyboard input working, improves the calculator branding to calcX, and keeps the original purple colour theme in a more professional layout.</p>
+        <p>This final version fixes the broken trig behaviour, supports typed scientific functions like sin(30), keeps keyboard input working, improves parser support, and keeps the original purple theme in a clean publish-ready layout.</p>
       </article>
     </section>
 
@@ -742,6 +743,12 @@
     let ans = 0;
     let justCalculated = false;
     let toastTimeout;
+
+    const insertableFunctions = new Set([
+      'sin', 'cos', 'tan', 'asin', 'acos', 'atan',
+      'sinh', 'cosh', 'tanh',
+      'sqrt', 'cbrt', 'log10', 'ln', 'abs', 'round', 'floor', 'ceil'
+    ]);
 
     function showToast(message) {
       statusToast.textContent = message;
@@ -821,7 +828,11 @@
       const beforeChar = before.slice(-1);
       const insertedChar = inserted[0];
       const beforeEndsValue = /[0-9.)πe]/.test(beforeChar || '') || before.endsWith('Ans');
-      const insertedStartsValue = isStartOfValue(insertedChar) || inserted.startsWith('Ans');
+      const insertedStartsValue =
+        isStartOfValue(insertedChar) ||
+        inserted.startsWith('Ans') ||
+        /^[a-z]/i.test(insertedChar || '');
+
       return beforeEndsValue && insertedStartsValue;
     }
 
@@ -837,6 +848,20 @@
       }
 
       display.value += text;
+      justCalculated = false;
+      display.focus();
+    }
+
+    function insertFunctionCall(name) {
+      const current = display.value.trim();
+
+      if (!current || current === 'Error' || justCalculated) {
+        if (current === 'Error' || justCalculated) display.value = '';
+        insertText(`${name}(`);
+        return;
+      }
+
+      display.value = `${name}(${current})`;
       justCalculated = false;
       display.focus();
     }
@@ -941,9 +966,18 @@
           continue;
         }
 
-        if (ch === 'e') {
-          tokens.push({ type: 'number', value: Math.E });
-          i++;
+        if (/[a-z]/i.test(ch)) {
+          let j = i;
+          while (j < expr.length && /[a-z0-9]/i.test(expr[j])) j++;
+          const name = expr.slice(i, j);
+
+          if (name === 'e') {
+            tokens.push({ type: 'number', value: Math.E });
+          } else {
+            tokens.push({ type: 'identifier', value: name });
+          }
+
+          i = j;
           continue;
         }
 
@@ -981,6 +1015,60 @@
       }
 
       return tokens;
+    }
+
+    function evaluateFunction(name, args) {
+      switch (name) {
+        case 'sin': return Math.sin(toRadians(args[0]));
+        case 'cos': return Math.cos(toRadians(args[0]));
+        case 'tan': return Math.tan(toRadians(args[0]));
+        case 'asin':
+          if (args[0] < -1 || args[0] > 1) throw new Error();
+          return fromRadians(Math.asin(args[0]));
+        case 'acos':
+          if (args[0] < -1 || args[0] > 1) throw new Error();
+          return fromRadians(Math.acos(args[0]));
+        case 'atan': return fromRadians(Math.atan(args[0]));
+        case 'sinh': return Math.sinh(args[0]);
+        case 'cosh': return Math.cosh(args[0]);
+        case 'tanh': return Math.tanh(args[0]);
+        case 'sqrt':
+          if (args[0] < 0) throw new Error();
+          return Math.sqrt(args[0]);
+        case 'cbrt': return Math.cbrt(args[0]);
+        case 'log10':
+        case 'log':
+          if (args[0] <= 0) throw new Error();
+          return Math.log10(args[0]);
+        case 'ln':
+          if (args[0] <= 0) throw new Error();
+          return Math.log(args[0]);
+        case 'abs': return Math.abs(args[0]);
+        case 'round': return Math.round(args[0]);
+        case 'floor': return Math.floor(args[0]);
+        case 'ceil': return Math.ceil(args[0]);
+        case 'gcd': return gcd(args[0], args[1]);
+        case 'lcm': return lcm(args[0], args[1]);
+        case 'mod': return args[0] % args[1];
+        case 'root':
+          if (args[0] === 0) throw new Error();
+          return args[1] ** (1 / args[0]);
+        case 'avg':
+        case 'mean':
+          return args.reduce((sum, v) => sum + v, 0) / args.length;
+        case 'npr': {
+          const [n, r] = args;
+          if (r > n || n < 0 || r < 0 || !Number.isInteger(n) || !Number.isInteger(r)) throw new Error();
+          return factorial(n) / factorial(n - r);
+        }
+        case 'ncr': {
+          const [n, r] = args;
+          if (r > n || n < 0 || r < 0 || !Number.isInteger(n) || !Number.isInteger(r)) throw new Error();
+          return factorial(n) / (factorial(r) * factorial(n - r));
+        }
+        default:
+          throw new Error('Unknown function');
+      }
     }
 
     function safeEval(expr) {
@@ -1053,6 +1141,19 @@
         return parsePrimary();
       }
 
+      function parseArguments() {
+        const args = [];
+        if (peek() && peek().type === 'op' && peek().value === ')') return args;
+
+        while (true) {
+          args.push(parseExpression());
+          if (consume(',')) continue;
+          break;
+        }
+
+        return args;
+      }
+
       function parsePrimary() {
         const token = peek();
         if (!token) throw new Error('Unexpected end');
@@ -1060,6 +1161,19 @@
         if (token.type === 'number') {
           consume();
           return token.value;
+        }
+
+        if (token.type === 'identifier') {
+          const name = token.value;
+          consume();
+
+          if (!consume('(')) throw new Error('Missing opening bracket');
+          const args = parseArguments();
+          if (!consume(')')) throw new Error('Missing closing bracket');
+
+          const result = evaluateFunction(name.toLowerCase(), args);
+          if (!Number.isFinite(result)) throw new Error('Math error');
+          return result;
         }
 
         if (token.type === 'op' && token.value === '(') {
@@ -1092,7 +1206,6 @@
       for (const char of text) {
         if (char === '(') depth++;
         if (char === ')') depth--;
-
         if (char === ',' && depth === 0) {
           parts.push(current.trim());
           current = '';
@@ -1131,83 +1244,15 @@
         let value;
         let result;
 
+        if (insertableFunctions.has(name)) {
+          insertFunctionCall(name);
+          return;
+        }
+
         switch (name) {
-          case 'sin':
-            value = getValue();
-            result = Math.sin(toRadians(value));
-            break;
-          case 'cos':
-            value = getValue();
-            result = Math.cos(toRadians(value));
-            break;
-          case 'tan':
-            value = getValue();
-            result = Math.tan(toRadians(value));
-            break;
-          case 'asin':
-            value = getValue();
-            if (value < -1 || value > 1) throw new Error();
-            result = fromRadians(Math.asin(value));
-            break;
-          case 'acos':
-            value = getValue();
-            if (value < -1 || value > 1) throw new Error();
-            result = fromRadians(Math.acos(value));
-            break;
-          case 'atan':
-            value = getValue();
-            result = fromRadians(Math.atan(value));
-            break;
-          case 'sinh':
-            value = getValue();
-            result = Math.sinh(value);
-            break;
-          case 'cosh':
-            value = getValue();
-            result = Math.cosh(value);
-            break;
-          case 'tanh':
-            value = getValue();
-            result = Math.tanh(value);
-            break;
-          case 'sqrt':
-            value = getValue();
-            if (value < 0) throw new Error();
-            result = Math.sqrt(value);
-            break;
-          case 'cbrt':
-            value = getValue();
-            result = Math.cbrt(value);
-            break;
-          case 'log10':
-            value = getValue();
-            if (value <= 0) throw new Error();
-            result = Math.log10(value);
-            break;
-          case 'ln':
-            value = getValue();
-            if (value <= 0) throw new Error();
-            result = Math.log(value);
-            break;
           case 'exp':
             value = getValue();
             result = Math.exp(value);
-            break;
-          case 'abs':
-            value = getValue();
-            result = Math.abs(value);
-            break;
-          case 'round':
-            value = getValue();
-            result = Math.round(value);
-            break;
-          case 'floor':
-            value = getValue();
-            result = Math.floor(value);
-            break;
-          case 'ceil':
-            value = getValue();
-            result = Math.ceil(value);
             break;
           case 'factorial':
             value = getValue();
